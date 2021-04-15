@@ -43,8 +43,7 @@
       document.querySelectorAll("div").forEach((div) => {
         div.addEventListener("click", (event) => {
           console.log(event.pageX, event.pageY, event.clientX, event.clientY);
-          console.log(div.getBoundingRect());
-          console.log(event);
+          console.log(event.currentTarget.getBoundingClientRect());
         });
       });
     </script>

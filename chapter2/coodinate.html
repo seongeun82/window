@@ -8,9 +8,14 @@
     <style>
       body {
         /* overflow: hidden; */
+        display: flex;
+        justify-content: space-between;
+      }
+      ul {
+        margin: 0px;
       }
 
-      div {
+      .Box {
         width: 150px;
         height: 150px;
         background-color: thistle;
@@ -20,24 +25,41 @@
         margin: 10px;
       }
 
-      .special {
+      .Buttons {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+      }
+
+      button {
+        width: 80px;
+        margin: 10px;
+      }
+
+      .Special {
         background-color: teal;
       }
     </style>
   </head>
   <body>
-    <div class="Normal">1</div>
-    <div class="Normal">2</div>
-    <div class="Normal">3</div>
-    <div class="Normal">4</div>
-    <div class="Normal">5</div>
-    <div class="special">6</div>
-    <div class="Normal">7</div>
-    <div class="Normal">8</div>
-    <div class="Normal">9</div>
-    <div class="Normal">10</div>
-    <div class="Normal">11</div>
-
+    <div class="Boxes">
+      <div class="Box Normal">1</div>
+      <div class="Box Normal">2</div>
+      <div class="Box Normal">3</div>
+      <div class="Box Normal">4</div>
+      <div class="Box Normal">5</div>
+      <div class="Box Special">6</div>
+      <div class="Box Normal">7</div>
+      <div class="Box Normal">8</div>
+      <div class="Box Normal">9</div>
+      <div class="Box Normal">10</div>
+      <div class="Box Normal">11</div>
+    </div>
+    <ul class="Buttons">
+      <button class="move_step">move step</button>
+      <button class="move_fix">move fix</button>
+      <button class="move_special">move to special</button>
+    </ul>
     <script>
       // getCoodinates(event)
       document.querySelectorAll("div").forEach((div) => {
@@ -46,6 +68,26 @@
           console.log(event.currentTarget.getBoundingClientRect());
         });
       });
+
+      const specialBox = document.querySelector(".Special");
+
+      const moveStepBtn = document.querySelector(".move_step");
+      const moveFixBtn = document.querySelector(".move_fix");
+      const moveSpecialBtn = document.querySelector(".move_special");
+
+      moveStepBtn.addEventListener("click", () => {
+        // const posi_y = window.scrollY;
+        // window.scrollTo(0, posi_y + 100);
+        window.scrollBy({ top: 100, left: 0, behavior: "smooth" });
+      });
+      moveSpecialBtn.addEventListener("click", () => {
+        specialBox.scrollIntoView();
+      });
+      moveFixBtn.addEventListener("click", () => {
+        window.scrollTo(0, 100);
+      });
     </script>
   </body>
 </html>
+
+<!-- 100px 씩 이동, 100px 로 이동, special 로 이동  -->

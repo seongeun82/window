@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      .tag {
+        display: inline-block;
+        background-color: thistle;
+        padding: 16px;
+        margin-top: 16px;
+        margin-left: 16px;
+        font-size: 30px;
+      }
+    </style>
+    <title>WidnowSizeDocument</title>
+  </head>
+  <body>
+    <div class="tag">WindowSize</div>
+
+    <script>
+      const tag = document.querySelector(".tag");
+      const getTag = () => {
+        tag.innerHTML = `
+        windowScreen : ${window.screen.availHeight}, ${window.screen.availWidth} <br>
+        windowOuter : ${window.outerHeight}, ${window.outerWidth} <br>
+        windowScreen : ${window.innerHeight}, ${window.innerWidth} <br>
+        documentElement.clientWidth : ${document.documentElement.clientHeight}, ${document.documentElement.clientWidth}
+        `;
+      };
+      window.addEventListener("resize", () => {
+        getTag();
+      });
+      getTag();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script
+      src="https://kit.fontawesome.com/cfdc397187.js"
+      crossorigin="anonymous"
+    ></script>
+    <title>Document</title>
+    <style>
+      body {
+        width: 1000px;
+        height: 1000px;
+        background-color: green;
+        cursor: url("./imgs/target1.png"),
+          url("./imgs/coordinates/img/target.png"), default;
+      }
+
+      i {
+        color: white;
+        font-size: 50px;
+      }
+      .v-line {
+        border-left: thick solid black;
+        height: 10000px;
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        transform: translateX();
+        margin: 0px;
+        padding: 0px;
+      }
+      .h-line {
+        border-bottom: thick solid black;
+        width: 1000px;
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        transform: translateY();
+        margin: 0px;
+        padding: 0px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="pt_img">
+      <i class="fas fa-crosshairs"></i>
+    </div>
+    <div class="v-line"></div>
+    <div class="h-line"></div>
+
+    <script>
+      const xline = document.querySelector(".h-line");
+      const yline = document.querySelector(".v-line");
+
+      const drawCrossLine = (event) => {
+        const x = event.clientX;
+        const y = event.clientY;
+        console.log("translateY(${y}px)");
+        xline.style.transform = `translateY(${y + 22}px)`;
+        yline.style.transform = `translateX(${x + 22}px)`;
+      };
+
+      window.addEventListener("mousemove", (event) => {
+        drawCrossLine(event);
+      });
+    </script>
+  </body>
+</html>

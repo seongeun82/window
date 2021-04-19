@@ -1,5 +1,6 @@
 body {
   background: black;
+  margin: 0;
 }
 
 .line {
@@ -9,27 +10,21 @@ body {
 .horizontal {
   width: 100%;
   height: 1px;
-  top: 50%;
 }
 
 .vertical {
   height: 100%;
   width: 1px;
-  left: 50%;
 }
 
 .target {
   position: absolute;
   color: white;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
 }
 
 .tag {
   color: white;
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(30px, 30px);
+  margin-left: 30px;
+  margin-top: 30px;
 }

@@ -28,10 +28,11 @@ const addNewItem = (itemName) => {
   newItemDiv.appendChild(trashImg);
 
   aa = document.querySelector(".item__name");
-  aa.innerHTML = itemName;
+  aa.innerText = itemName;
 
   addRemoveEvent(newItemDiv, newItemNm, trashImg);
   input.value = "";
+  input.focus(); // 다시 클릭할 수 있게 커서를 여기에 주는 것 !!!!
 };
 
 input.addEventListener("keypress", (event) => {

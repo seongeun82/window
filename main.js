@@ -36,16 +36,14 @@ function createItem(text) {
   const deleteBtn = document.createElement("button");
   deleteBtn.setAttribute("class", "item__delete");
   deleteBtn.innerHTML = '<i class= "fas fa-trash-alt"></i>';
-  deleteBtn.addEventListener("click", () => {
-    items.removeChild(itemRow);
-  });
+  // deleteBtn.addEventListener("click", () => {
+  //   items.removeChild(itemRow);
+  // });
 
   const itemDivider = document.createElement("div");
   itemDivider.setAttribute("class", "item__divider");
-
   item.appendChild(name);
   item.appendChild(deleteBtn);
-
   itemRow.appendChild(item);
   itemRow.appendChild(itemDivider);
 
@@ -60,4 +58,12 @@ input.addEventListener("keypress", (event) => {
   if (event.key === "Enter") {
     onAdd();
   }
+});
+
+// event 위임을 활용해서 클릭되었을 때 아이템 삭제하기
+
+items.addEventListener("click", (event) => {
+  // 문제점 고유한 id 를 찾아서 하는 법 : global id uuid 를 활용할 수 있다.
+  // 현재의 상태는 아이템 간의 구분이 없는 상태가 맞음 오호!! 알 것이라고 생각했는데 모르네..
+  console.log(event);
 });

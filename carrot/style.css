@@ -41,16 +41,18 @@ i {
   margin: 24px auto;
 }
 
+.filed {
+  width: 100%;
+}
+
 .carrot {
   opacity: 0;
+  position: absolute;
+  transform: translate(100%, 200px);
 }
 
 .active {
   opacity: 100;
-}
-
-.carrot {
-  position: absolute;
 }
 
 .bug {

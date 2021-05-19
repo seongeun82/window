@@ -6,6 +6,7 @@ button {
 
 body {
   text-align: center;
+  background-color: black;
 }
 
 .game {
@@ -57,6 +58,8 @@ body {
   margin-top: 8px;
   font-size: 24px;
   visibility: hidden;
+  user-select: none;
+  cursor: auto;
 }
 
 .game__score {
@@ -70,6 +73,8 @@ body {
   background-color: darksalmon;
   color: white;
   visibility: hidden;
+  user-select: none;
+  cursor: auto;
 }
 
 .pop-up {
@@ -101,3 +106,13 @@ body {
   display: block;
   font-size: 38px;
 }
+
+.carrot, 
+.bug{
+  transform: transform 100ms ease-in; 
+}
+
+.carrot: hover, 
+.bug: hover{
+  transform: scal(1,1)
+}, 

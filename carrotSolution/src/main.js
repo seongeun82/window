@@ -1,12 +1,12 @@
 "use strict";
 import PopUp from "./popup.js";
+import Field from "./field.js";
+
 const CARROT_COUNT = 5;
 const BUG_COUNT = 5;
 const carrotSize = 80;
 const GAME_DURATION_SEC = 5;
 
-const field = document.querySelector(".game__field");
-const fieldRect = field.getBoundingClientRect();
 const gameBtn = document.querySelector(".game__button");
 const gameTimer = document.querySelector(".game__timer");
 const gameScore = document.querySelector(".game__score");
@@ -16,18 +16,35 @@ let score = 0;
 let timer = undefined;
 
 const gameFinishBanner = new PopUp();
+gameFinishBanner.setClickListener(() => {
+  startGame();
+});
+
+const gameField = new Field(BUG_COUNT, BUG_COUNT);
+gameField.setClickListener(onItemClick);
+
+function onItemClick(itemName) {
+  // 빨리 리턴하는 것이 중요하다.
+  if (!started) {
+    return;
+  }
+
+  if (itemName === "carrot") {
+    score++;
+    updateScoreBoard();
+    if (score === CARROT_COUNT) {
+      finishGame(true);
+    }
+  } else if (itemName === "bug") {
+    finishGame(false);
+  }
+}
 
 const carrotSound = new Audio("./sound/carrot_pull.mp3");
 const bugSound = new Audio("./sound/bug_pull.mp3");
 const bgSound = new Audio("./sound/bg.mp3");
 const winSound = new Audio("./sound/game_win.mp3");
 const alertSound = new Audio("./sound/alert.wav");
-
-gameFinishBanner.setClickListener(() => {
-  startGame();
-});
-
-field.addEventListener("click", onFieldClick);
 
 gameBtn.addEventListener("click", () => {
   if (started) {
@@ -116,29 +133,8 @@ function showTimerAndScore() {
 function initGame() {
   // 벌레와 당근을 생성한 뒤 field 에 추가해줌
   score = 0;
-  field.innerHTML = "";
   gameScore.innerText = CARROT_COUNT;
-  addItem("carrot", 5, "img/carrot.png");
-  addItem("bug", 5, "img/bug.png");
-}
-
-function onFieldClick(event) {
-  // 빨리 리턴하는 것이 중요하다.
-  if (!started) {
-    return;
-  }
-  const target = event.target;
-  if (target.matches(".carrot")) {
-    target.remove();
-    score++;
-    playSound(carrotSound);
-    updateScoreBoard();
-    if (score === CARROT_COUNT) {
-      finishGame(true);
-    }
-  } else if (target.matches(".bug")) {
-    finishGame(false);
-  }
+  gameField.init();
 }
 
 function playSound(sound) {
@@ -156,23 +152,4 @@ function updateScoreBoard() {
 
 function randomNumber(min, max) {
   return Math.floor(min + Math.random() * (max - min));
-}
-
-function addItem(className, count, imgPath) {
-  const x1 = 0;
-  const y1 = 0;
-  const x2 = fieldRect.width - carrotSize;
-  const y2 = fieldRect.height - carrotSize;
-
-  for (let i = 0; i < count; i++) {
-    const item = document.createElement("img");
-    item.setAttribute("class", className);
-    item.setAttribute("src", imgPath);
-    item.style.position = "absolute";
-    const x = randomNumber(x1, x2);
-    const y = randomNumber(y1, y2);
-    item.style.left = `${x}px`;
-    item.style.top = `${y}px`;
-    field.appendChild(item);
-  }
 }

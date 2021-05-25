@@ -1,6 +1,6 @@
 "use strict";
-const carrotSound = new Audio("./sound/carrot_pull.mp3");
-const bugSound = new Audio("./sound/bug_pull.mp3");
+import * as sound from "./sound.js";
+
 const carrotSize = 80;
 export default class Field {
   constructor(carrotCount, bugCount) {
@@ -8,7 +8,12 @@ export default class Field {
     this.bugCount = bugCount;
     this.field = document.querySelector(".game__field");
     this.fieldRect = this.field.getBoundingClientRect();
-
+    // this binding !!!
+    // 클래스 안에 있는 어떤 함수를 다른 콜백으로 전달할 때는 !!!!
+    // 1.
+    // this.onClick = this.onClick.bind(this);
+    // 2. arrow function 은 this 가 유지됨
+    // 3.
     this.field.addEventListener("click", this.onClick);
   }
 
@@ -41,21 +46,16 @@ export default class Field {
     }
   }
 
-  onClick(event) {
+  onClick = (event) => {
     const target = event.target;
     if (target.matches(".carrot")) {
       target.remove();
-      playSound(carrotSound);
+      sound.playCarrot();
       this.onItemClick && this.onItemClick("carrot");
     } else if (target.matches(".bug")) {
       this.onItemClick && this.onItemClick("bug");
     }
-  }
-
-  playSound(sound) {
-    sound.currentTime = 0;
-    sound.play();
-  }
+  };
 }
 
 function randomNumber(min, max) {

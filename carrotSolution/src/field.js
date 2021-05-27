@@ -61,3 +61,5 @@ export default class Field {
 function randomNumber(min, max) {
   return Math.floor(min + Math.random() * (max - min));
 }
+
+// this 라는 것은 다른 곳에서 쓰일 때는 함수와 바인딩 !! 에로우 펑션으로 함수를 정의하면 바인딩이 자동으로 된다.

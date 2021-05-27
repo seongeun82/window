@@ -2,6 +2,28 @@
 import Field from "./field.js";
 import * as sound from "./sound.js";
 
+// Builder Pattern
+export class GameBulder {
+  withGameDuration(duration) {
+    this.gameDuration = duration;
+    return this;
+  }
+
+  withCarrotCount(num) {
+    this.carrotCount = num;
+    return this;
+  }
+
+  withBugCount(num) {
+    this.bugCount = num;
+    return this;
+  }
+
+  build() {
+    return new Game(this.gameDuration, this.carrotCount, this.bugCount);
+  }
+}
+
 export default class Game {
   constructor(gameDuration, carrotCount, bugCount) {
     this.gameDuration = gameDuration;
@@ -43,8 +65,8 @@ export default class Game {
 
   stop() {
     this.started = false;
-    stopGameTimer();
-    hideGameButton();
+    this.stopGameTimer();
+    this.hideGameButton();
     sound.playAlert();
     sound.stopBgm();
     // gameFinishBanner.showWithText("REPLAY?");

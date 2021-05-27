@@ -1,13 +1,14 @@
 "use strict";
 import PopUp from "./popup.js";
-import Game from "./game.js";
+import Game, { GameBulder } from "./game.js";
 
 const gameFinishBanner = new PopUp();
-gameFinishBanner.setClickListener(() => {
-  game.start();
-});
+const game = new GameBulder()
+  .withGameDuration(5)
+  .withCarrotCount(3)
+  .withBugCount(3)
+  .build();
 
-const game = new Game(2, 2, 2);
 game.setGameStopListener((reason) => {
   let message;
   switch (reason) {
@@ -25,4 +26,8 @@ game.setGameStopListener((reason) => {
   }
 
   gameFinishBanner.showWithText(message);
+});
+
+gameFinishBanner.setClickListener(() => {
+  game.start();
 });
